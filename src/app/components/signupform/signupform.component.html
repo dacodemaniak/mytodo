@@ -49,8 +49,8 @@
                 <select id="select">
                   <option
                     *ngFor="let genre of civilite"
-                    value="{{ genre  | lowercase }}">
-                      {{ genre }}
+                    value="{{ genre.id }}">
+                      {{ genre.libelle }}
                   </option>
                 </select>
             </div>
