@@ -1,7 +1,10 @@
 <div class="row custom-row">
   <div class= "col-sm-5 custom-container jumbotron">
 
-    <form class="form-horizontal" [formGroup]="signupForm">
+    <form
+      class="form-horizontal"
+      [formGroup]="signupForm"
+      (ngSubmit)="onFormSubmit()">
         <fieldset>
           <legend>Créez votre compte</legend>
 

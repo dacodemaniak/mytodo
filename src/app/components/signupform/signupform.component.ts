@@ -37,6 +37,14 @@ export class SignupformComponent implements OnInit {
    public get password() { return this.signupForm.controls.password; }
    public get confirmPassword() { return this.signupForm.controls.confirmPassword; }
 
+   public onFormSubmit(): void {
+     if (this.signupForm.valid) {
+       this.user = new User(this.signupForm.value);
+       console.log('Youpiiiii ! ' + JSON.stringify(this.user));
+     } else {
+       console.log('Same player shoot again !!!');
+     }
+   }
    /**
     * Méthode appelée immédiatement après le constructeur de la classe
     */
