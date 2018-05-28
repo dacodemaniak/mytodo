@@ -1,0 +1,73 @@
+<div class="row custom-row">
+  <div class= "col-sm-5 custom-container jumbotron">
+
+    <form class="form-horizontal">
+        <fieldset>
+          <legend>Créez votre compte</legend>
+
+            <!--- Nom -->
+            <div class="form-group">
+              <label for="inputNom">Nom</label>
+              <input type="text"
+                id="inputNom"
+                placeholder="Nom">
+            </div>
+
+            <!--- Nom -->
+              <div class="form-group">
+                  <label for="inputPrenom">Prénom</label>
+                  <input type="text"
+                    id="inputPrenom"
+                    placeholder="Prénom">
+              </div>
+
+            <!--- Email -->
+            <div class="form-group">
+              <label for="inputEmail">Email</label>
+              <input type="text"
+                id="inputEmail"
+                placeholder="Email">
+            </div>
+            <!--- Password -->
+            <div class="form-group">
+              <label for="inputPassword">Mot de passe</label>
+              <input type="password"
+                id="inputPassword"
+                placeholder="Mot de passe">
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword" >Confirmation</label>
+              <input type="password"
+                id="confirmPassword"
+                placeholder="Confirmation">
+            </div>
+
+            <!--- Genre -->
+            <div class="form-group">
+              <label for="select">Civilité</label>
+                <select id="select">
+                  <option
+                    *ngFor="let genre of civilite"
+                    value="{{ genre  | lowercase }}">
+                      {{ genre }}
+                  </option>
+                </select>
+            </div>
+
+            <!--- CGU -->
+             <div class="form-group checkbox">
+              <label>
+                <input type="checkbox"> J'accepte les CGU
+              </label>
+            </div>
+
+           <!--- Boutons -->
+            <div class="form-group">
+                <button type="reset" class="btn btn-default">Annuler</button>
+                <button type="submit" class="btn btn-primary">Créer</button>
+            </div>
+        </fieldset>
+    </form>
+  </div>
+</div>
