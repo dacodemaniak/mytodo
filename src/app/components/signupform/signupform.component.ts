@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Civilite } from './../../models/civilite';
+import { User } from './../../models/user';
 
 @Component({
   selector: 'app-signupform',
@@ -12,7 +14,17 @@ export class SignupformComponent implements OnInit {
    */
   public civilite: Civilite[];
 
-  constructor() {
+/**
+ * Instance du modèle User
+ */
+  private user: User;
+
+  /**
+   * Instance pour le contrôle du formulaire d'inscription
+   */
+  public signupForm: FormGroup;
+
+  constructor(private builder: FormBuilder) {
     this.civilite = new Array();
 
     this.civilite.push({id: 1, libelle: 'Mademoiselle'});
@@ -20,7 +32,24 @@ export class SignupformComponent implements OnInit {
     this.civilite.push({id: 3, libelle: 'Monsieur'});
    }
 
+   public get nom() { return this.signupForm.controls.nom; }
+   public get email() { return this.signupForm.controls.email; }
+   public get password() { return this.signupForm.controls.password; }
+   public get confirmPassword() { return this.signupForm.controls.confirmPassword; }
+
+   /**
+    * Méthode appelée immédiatement après le constructeur de la classe
+    */
   ngOnInit() {
+    this.signupForm = this.builder.group({
+      nom: ['', Validators.required],
+      prenom: [''],
+      email: ['', [Validators.required, Validators.email]],
+      civilite: [''],
+      cgu: [false, Validators.requiredTrue],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
+    });
   }
 
 }

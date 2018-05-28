@@ -1,7 +1,7 @@
 <div class="row custom-row">
   <div class= "col-sm-5 custom-container jumbotron">
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" [formGroup]="signupForm">
         <fieldset>
           <legend>Créez votre compte</legend>
 
@@ -10,15 +10,24 @@
               <label for="inputNom">Nom</label>
               <input type="text"
                 id="inputNom"
-                placeholder="Nom">
+                placeholder="Nom"
+                formControlName="nom">
+
+                <!-- Un message d'erreur pour l'utilisateur -->
+                <div
+                  class="alert alert-warning"
+                  *ngIf="nom.invalid && nom.touched">
+                    Votre nom ne peut pas être vide !
+                </div>
             </div>
 
-            <!--- Nom -->
+            <!--- Prénom -->
               <div class="form-group">
                   <label for="inputPrenom">Prénom</label>
                   <input type="text"
                     id="inputPrenom"
-                    placeholder="Prénom">
+                    placeholder="Prénom"
+                    formControlName="prenom">
               </div>
 
             <!--- Email -->
@@ -26,27 +35,45 @@
               <label for="inputEmail">Email</label>
               <input type="text"
                 id="inputEmail"
-                placeholder="Email">
+                placeholder="Email"
+                formControlName="email">
+
+                <!-- Message d'erreur pour l'email -->
+                <div *ngIf="email.invalid && email.touched"
+                  class="alert alert-warning"
+                >
+                  <!-- Premier cas : email vide -->
+                  <div *ngIf="email.errors?.required">
+                    L'adresse e-mail ne peut pas être vide
+                  </div>
+
+                  <!-- Second cas : email non conforme -->
+                  <div *ngIf="email.errors?.email">
+                      L'adresse saisie ne semble pas être une adresse valide !
+                    </div>
+                </div>
             </div>
             <!--- Password -->
             <div class="form-group">
               <label for="inputPassword">Mot de passe</label>
               <input type="password"
                 id="inputPassword"
-                placeholder="Mot de passe">
+                placeholder="Mot de passe"
+                formControlName="password">
             </div>
 
             <div class="form-group">
               <label for="confirmPassword" >Confirmation</label>
               <input type="password"
                 id="confirmPassword"
-                placeholder="Confirmation">
+                placeholder="Confirmation"
+                formControlName="confirmPassword">
             </div>
 
             <!--- Genre -->
             <div class="form-group">
               <label for="select">Civilité</label>
-                <select id="select">
+                <select id="select" formControlName="civilite">
                   <option
                     *ngFor="let genre of civilite"
                     value="{{ genre.id }}">
@@ -58,16 +85,27 @@
             <!--- CGU -->
              <div class="form-group checkbox">
               <label>
-                <input type="checkbox"> J'accepte les CGU
+                <input type="checkbox" formControlName="cgu"> J'accepte les CGU
               </label>
             </div>
 
            <!--- Boutons -->
             <div class="form-group">
                 <button type="reset" class="btn btn-default">Annuler</button>
-                <button type="submit" class="btn btn-primary">Créer</button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!signupForm.valid"
+                >
+                  Créer
+              </button>
             </div>
         </fieldset>
+
+        <!-- A ne pas faire en production !!! -->
+        <p>
+          Valeurs : {{ signupForm.value | json }} : {{ signupForm.status | json }}
+        </p>
     </form>
   </div>
 </div>
