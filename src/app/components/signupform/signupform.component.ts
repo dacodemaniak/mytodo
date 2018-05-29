@@ -4,6 +4,7 @@ import { Civilite } from './../../models/civilite';
 import { User } from './../../models/user';
 import { UserService } from './../../services/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signupform',
@@ -28,7 +29,8 @@ export class SignupformComponent implements OnInit {
 
   constructor(private builder: FormBuilder,
     private userService: UserService,
-    private router: Router) {
+    private router: Router,
+    private toaster: ToastrService) {
     this.civilite = new Array();
 
     this.civilite.push({id: 1, libelle: 'Mademoiselle'});
@@ -44,7 +46,9 @@ export class SignupformComponent implements OnInit {
    public onFormSubmit(): void {
      if (this.signupForm.valid) {
        this.user = new User(this.signupForm.value);
-      this.userService.keepIt(this.user).then((datas) => {
+      this.userService.keepIt(this.user).then((datas: any) => {
+        console.log(JSON.stringify(datas));
+        this.toaster.success('MyTodo', datas.message);
         this.router.navigate(['home']);
       });
      } else {

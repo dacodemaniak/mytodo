@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { RoutingModule } from './modules/routing/routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { SignupformComponent } from './components/signupform/signupform.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,7 +19,9 @@ import { HomeComponent } from './components/home/home.component';
     BrowserModule,
     ReactiveFormsModule,
     RouterModule,
-    RoutingModule
+    RoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
