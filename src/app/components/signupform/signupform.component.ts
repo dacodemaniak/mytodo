@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Civilite } from './../../models/civilite';
 import { User } from './../../models/user';
+import { UserService } from './../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signupform',
@@ -24,7 +26,9 @@ export class SignupformComponent implements OnInit {
    */
   public signupForm: FormGroup;
 
-  constructor(private builder: FormBuilder) {
+  constructor(private builder: FormBuilder,
+    private userService: UserService,
+    private router: Router) {
     this.civilite = new Array();
 
     this.civilite.push({id: 1, libelle: 'Mademoiselle'});
@@ -40,7 +44,9 @@ export class SignupformComponent implements OnInit {
    public onFormSubmit(): void {
      if (this.signupForm.valid) {
        this.user = new User(this.signupForm.value);
-       console.log('Youpiiiii ! ' + JSON.stringify(this.user));
+      this.userService.keepIt(this.user).then((datas) => {
+        this.router.navigate(['home']);
+      });
      } else {
        console.log('Same player shoot again !!!');
      }
