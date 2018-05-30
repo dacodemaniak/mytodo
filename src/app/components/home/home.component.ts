@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public todo: FormGroup;
+
+  constructor(
+    private builder: FormBuilder,
+    private http: HttpClient
+  ) { }
+
+  public get task() { return this.todo.controls.task; }
+  public get debut() { return this.todo.controls.debut; }
+  public get fin() { return this.todo.controls.fin; }
 
   ngOnInit() {
+    this.todo = this.builder.group({
+      task: ['', [Validators.required]],
+      debut: ['', [Validators.required]],
+      fin: ['', [Validators.required]]
+  });
+  }
+
+  public onFormSubmit(): void {
+    if (this.todo.valid) {
+      console.log('Todo : ' + JSON.stringify(this.todo.value));
+      // On peut faire l'appel au backend
+      this.http.post(
+        'http://localhost:3000/Todos',
+        this.todo.value
+      ).subscribe((datas: any) => {
+        // datas contient les données retournées par le backend
+      });
+    } else {
+      // On peut aussi afficher un toast
+    }
   }
 
 }

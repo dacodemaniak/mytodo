@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SignupformComponent } from '../../components/signupform/signupform.component';
 import { HomeComponent } from './../../components/home/home.component';
+import { AuthGuardService } from './../../services/authguard.service';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'signup', pathMatch: 'full'},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'signup', component: SignupformComponent},
-  {path: 'home', component: HomeComponent}
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

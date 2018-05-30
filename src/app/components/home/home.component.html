@@ -1,3 +1,32 @@
-<p>
-  home works!
-</p>
+<form class="form-inline" [formGroup]="todo" (ngSubmit)="onFormSubmit()">
+  <div class="form-group">
+    <input type="text"
+      formControlName="task"
+      placeholder="A faire..."
+      maxlength="255"
+      class="form-control"
+    >
+  </div>
+  <div class="form-group">
+    <input type="date"
+      formControlName="debut"
+      placholder="De"
+      class="form-control"
+  >
+</div>
+
+<div class="form-group">
+  <input type="date"
+    formControlName="fin"
+    placholder="A"
+    class="form-control"
+>
+</div>
+
+<button
+  type="submit"
+  class="btn btn-outline-success"
+  [disabled]="task.invalid">
+  <i class="glyphicon glyphicon-ok"></i>"
+</button>
+</form>
