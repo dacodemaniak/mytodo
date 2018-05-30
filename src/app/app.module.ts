@@ -10,12 +10,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { SignupformComponent } from './components/signupform/signupform.component';
 import { HomeComponent } from './components/home/home.component';
+import { TodolistComponent } from './components/todolist/todolist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupformComponent,
-    HomeComponent
+    HomeComponent,
+    TodolistComponent
   ],
   imports: [
     BrowserModule,

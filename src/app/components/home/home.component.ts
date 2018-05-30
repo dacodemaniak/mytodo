@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { TodosService } from './../../services/todos.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private todoService: TodosService
   ) { }
 
   public get task() { return this.todo.controls.task; }
@@ -37,6 +39,8 @@ export class HomeComponent implements OnInit {
         this.todo.value
       ).subscribe((datas: any) => {
         // datas contient les données retournées par le backend
+        // On peut donc émettre un nouveau todo
+        this.todoService.sendTodo(datas);
       });
     } else {
       // On peut aussi afficher un toast
